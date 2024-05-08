@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<meta charset="utf-8"> 
+<title>hyperOS frontend CDN(hyperos.com)</title>
+</head>
+<body>
+
+<p><strong>异步获取HTTP POST 请求</strong></p>
+<p id="frontend"></p>
+<script>
+var data = "打开物联网应用";
+var xhr = new XMLHttpRequest();
+xhr.onload = function () {
+    // 输出接收到的文字数据
+    document.getElementById("frontend").innerHTML=xhr.response;
+}
+ 
+xhr.onerror = function () {
+    document.getElementById("frontend").innerHTML="请求出错";
+}
+// WARNING: For POST requests, body is set to null by browsers.
+
+xhr.withCredentials = true;
+
+// xhr.addEventListener("readystatechange", function() {
+//     if(this.readyState === 4) {
+//         console.log(this.responseText);
+//     }
+// });
+// 发送异步 POST 请求
+// xhr.open("POST", "http://casepublicscene.arservice.cloud:31030/textData?user=did%3Accp%3A289yGYuJouWgnBT4PexWaKas4yBUfdkD8z");
+xhr.open("POST", "http://localhost:8001/test",true);
+xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+xhr.setRequestHeader("HOST", "app.ar.arservice.cloud");
+xhr.setRequestHeader("SCNID", "did:ccp:289yGYuJouWgnBT4PexWaKas4yBUfdkD8z");
+xhr.setRequestHeader("content-type", "application/json");
+xhr.send(data);
+
+
+
+</script>
+
+</body>
+</html>
